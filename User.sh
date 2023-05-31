@@ -27,7 +27,7 @@ echo -e "\e[33m Install Nodejs Dependencies\e[0m"
 npm install  &>>/tmp/roboshop.log
 
 echo -e "\e[33m Setup systemD services\e[0m"
-cp root/Roboshop-project/User.service /etc/systemd/system/User.service  &>>/tmp/roboshop.log
+cp /root/Roboshop-project/User.service /etc/systemd/system/User.service  &>>/tmp/roboshop.log
 
 echo -e "\e[33m Start User service\e[0m"
 systemctl daemon-reload &>>/tmp/roboshop.log
