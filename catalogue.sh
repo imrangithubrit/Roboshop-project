@@ -1,40 +1,40 @@
 
 echo -e "\e[33m Configuration Nodejs Reps\e[0m"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash  &>>/tmp/roboshop.log
 
 
 echo -e "\e[33m Installation the nodejs\e[0m"
-yum install nodejs -y
+yum install nodejs -y  &>>/tmp/roboshop.log
 
 echo -e "e\[33m Add Application user\e[0m"
-useradd roboshop
+useradd roboshop  &>>/tmp/roboshop.log
 
-rm -rf /app
-mkdir /app
+rm -rf /app &>>/tmp/roboshop.log
+mkdir /app &>>/tmp/roboshop.log
 
 echo -e "\e[33m Download Application content\e[0m"
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip 
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip  &>>/tmp/roboshop.log
 cd /app 
 
 echo -e "\e[33m Extract Application content \e[0m"
-unzip /tmp/catalogue.zip
-cd /app 
+unzip /tmp/catalogue.zip  &>>/tmp/roboshop.log
+cd /app  &>>/tmp/roboshop.log
 echo -e "\e[33m Install Nodejs Dependencies\e[0m"
-npm install 
+npm install &>>/tmp/roboshop.log
 
 echo -e "\e[33m setup systemd service\e [0m"
-cp catalogue.service /etc/systemd/system/catalogue.service
+cp catalogue.service /etc/systemd/system/catalogue.service  &>>/tmp/roboshop.log
 
 echo -e "\e[33m start Catalogue service \e[0m"
-systemctl daemon-reload
-systemctl enable catalogue 
-systemctl restart catalogue
+systemctl daemon-reload  &>>/tmp/roboshop.log
+systemctl enable catalogue  &>>/tmp/roboshop.log
+systemctl restart catalogue &>>/tmp/roboshop.log
 
 echo -e "\e[33m Copy Mongodb repo file\e[0m"
-cp Mongodb.repo /etc/yum.repos.d/mongo.repo
+cp Mongodb.repo /etc/yum.repos.d/mongo.repo  &>>/tmp/roboshop.log
 
 echo -e "\e[33m Install Mongodb repo file\e[0m"
-yum install mongodb-org-shell -y
+yum install mongodb-org-shell -y  &>>/tmp/roboshop.log
 
 echo -e "\e[33m Load schema\e[0m"
-mongo --host mongodb://mongodb-dev.devopsb72.store </app/schema/catalogue.js
+mongo --host mongodb://mongodb-dev.devopsb72.store </app/schema/catalogue.js  &>>/tmp/roboshop.log
